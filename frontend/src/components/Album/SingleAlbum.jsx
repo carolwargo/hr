@@ -1,38 +1,58 @@
 //hr/frontend/src/components/Album/SingleAlbum.jsx
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import api from '../../api';
+import { Container, Row, Col, Spinner } from 'react-bootstrap';
 
 const SingleAlbum = () => {
   const { id } = useParams();
   const [album, setAlbum] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchAlbum = async () => {
       try {
         const response = await api.get(`/api/albums/${id}`);
         setAlbum(response.data);
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching album:', error);
+        setError('Failed to load album');
+        setLoading(false);
       }
     };
     fetchAlbum();
   }, [id]);
 
-  if (!album) return <div>Loading...</div>;
+  if (loading) {
+    return (
+      <Container className="text-center py-5">
+        <Spinner animation="border" />
+      </Container>
+    );
+  }
+
+  if (error) {
+    return (
+      <Container className="text-center py-5">
+        <h3>{error}</h3>
+      </Container>
+    );
+  }
 
   return (
-    <div className="container py-5">
+    <Container className="py-5">
       <h3>{album.title}</h3>
       <p>{album.description}</p>
-      <div className="row">
+      <Row>
         {album.images.map((image, index) => (
-          <div className="col-md-4" key={index}>
+          <Col md={4} key={index} className="mb-3">
             <img src={image} alt={`Image ${index + 1}`} className="img-fluid" />
-          </div>
+          </Col>
         ))}
-      </div>
-    </div>
+      </Row>
+    </Container>
   );
 };
 

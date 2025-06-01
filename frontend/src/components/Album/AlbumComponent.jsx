@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import api from '../../api/index.jsx'; // Adjust the import path as necessary
 import { Modal, Button, Form, Carousel } from 'react-bootstrap';
 import { saveAs } from 'file-saver';
-import './AlbumComponent.css';
+import '../../App.css';
 
 const AlbumComponent = () => {
   const [albums, setAlbums] = useState([]);

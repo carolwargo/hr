@@ -7,25 +7,22 @@ dotenv.config();
 
 const seedData = async () => {
   try {
-    // Connect to MongoDB
     await mongoose.connect(process.env.MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
     console.log('Connected to MongoDB');
 
-    // Clear existing data
     await User.deleteMany({});
     await Album.deleteMany({});
     console.log('Cleared existing users and albums');
 
-    // Seed users
     const users = [
       {
         firstname: 'Jane',
         lastname: 'Doe',
         email: 'jane.doe@example.com',
-        password: 'password123', // Will be hashed by User model
+        password: 'password123',
       },
       {
         firstname: 'John',
@@ -38,7 +35,6 @@ const seedData = async () => {
     const createdUsers = await User.insertMany(users);
     console.log('Seeded users:', createdUsers.map(u => u.email));
 
-    // Seed albums
     const seedAlbums = [
       {
         title: 'Jane\'s Mountain Adventure',
@@ -75,7 +71,6 @@ const seedData = async () => {
     await Album.insertMany(seedAlbums);
     console.log('Seeded albums');
 
-    // Disconnect
     await mongoose.disconnect();
     console.log('Disconnected from MongoDB');
   } catch (error) {

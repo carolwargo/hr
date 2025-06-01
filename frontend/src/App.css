@@ -2,7 +2,8 @@
   opacity: 0.8;
 }
 
-.fa-eye:hover, .fa-trash:hover {
+.fa-eye:hover,
+.fa-trash:hover {
   color: #007bff;
 }
 
