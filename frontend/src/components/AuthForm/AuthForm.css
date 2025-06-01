@@ -1,0 +1,213 @@
+/* === Container === */
+.auth-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Use min-height to avoid overflow issues */
+  background-color: #e9ecef;
+  padding: 1rem; /* Add padding for small screens */
+}
+
+.form-container {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  margin: 0 auto;
+  padding: 2.5rem; /* Reduced padding for smaller screens */
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 500px; /* Replace min-width with max-width */
+}
+
+/* === Titles === */
+.form-title {
+  text-align: center;
+  font-size: clamp(1.5rem, 5vw, 1.8rem); /* Responsive font size */
+  margin-bottom: 0.25rem;
+  color: #009dff;
+}
+
+.form-subtitle {
+  text-align: center;
+  font-size: clamp(0.9rem, 3vw, 1rem);
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+/* === Form Groups === */
+.form-group {
+  margin-bottom: .5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-size: 0.9rem; /* Slightly larger for readability */
+}
+
+/* === Input Fields === */
+.form-input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: .9rem;
+  border: 2px solid #ccc !important;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #212121;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: none;
+}
+
+.form-input::placeholder {
+  color: gray !important;
+}
+
+.form-input:focus {
+  border-color: #1d1d1d !important;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25) !important;
+}
+
+/* === Layout Helpers === */
+.row,
+.form-row {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping for mobile */
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem; /* Increase gap for better spacing */
+}
+
+.col,
+.form-col {
+  flex: 1;
+  min-width: 0; /* Prevent overflow */
+}
+
+/* Stack columns on small screens */
+@media (max-width: 576px) {
+  .row .col,
+  .form-row .form-col {
+    flex: 100%;
+    width: 100%;
+  }
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+/* === Checkboxes === */
+.form-checkbox {
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.form-checkbox input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* === Error Message === */
+.form-error {
+  color: red;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* === Links === */
+.form-link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.form-link:hover {
+  text-decoration: underline;
+}
+
+/* === Buttons === */
+.form-button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #0f0f0f;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.form-button:hover {
+  background-color: #0056b3;
+}
+
+/* === Footer === */
+.form-footer {
+  text-align: center;
+  margin-top: 0.75rem;
+}
+
+/* === Responsive Adjustments === */
+.hide-on-small {
+  display: block; /* Show labels by default */
+}
+
+@media (max-width: 576px) {
+  .form-container {
+    padding: 1rem;
+    margin: 0 1rem; /* Add side margins for small screens */
+  }
+
+  .form-title {
+    font-size: 1.5rem;
+  }
+
+  .form-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .form-group label {
+    font-size: 0.85rem;
+    display: block; /* Ensure labels are visible */
+  }
+
+  .form-input {
+    font-size: 0.95rem;
+    padding: 0.2rem;
+  }
+
+  .form-button {
+    padding: 0.2rem;
+    font-size: 0.95rem;
+  }
+
+  .form-checkbox {
+    font-size: 0.85rem;
+  }
+
+  .form-footer {
+    font-size: 0.9rem;
+  }
+
+  .hide-on-small {
+    display: block; /* Show labels on small screens */
+  }
+
+  .right {
+    text-align: left; /* Align ForgotPassword link left on mobile */
+  }
+}

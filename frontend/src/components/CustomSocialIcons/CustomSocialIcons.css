@@ -1,0 +1,43 @@
+/* === Social Buttons === */
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    margin-top: 1.5rem;
+  }
+  
+  .icon-button {
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: #333;
+    transition: color 0.3s ease;
+    width:45px;
+	height:45px;
+    border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 4px #666666;
+    background-color: #d5d4d4;
+  }
+  
+  .icon-button:hover {
+    color: #007bff;
+  }
+  /*#76a1fd*/
+  .social-buttons .fa-facebook-f {
+    color: #3b5998;
+  }
+  
+  .social-buttons .fa-google {
+    color: #db4437;
+  }
+  
+  .social-buttons .fa-twitter  {
+    color: #1fa9ff;
+  }
+  
+  .social-buttons .fa-instagram {
+    color: #fd01ad;
+    font-weight: 800;
+  }
+  
