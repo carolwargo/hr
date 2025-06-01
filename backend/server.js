@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/connection');
 const albumRoutes = require('./routes/albumRoutes');
+const authRoutes = require('./routes/authRoutes');
 require('dotenv').config();
 
 const app = express();
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 
 app.use('/api/albums', albumRoutes);
+app.use('/api/auth', authRoutes);
 
 connectDB();
 

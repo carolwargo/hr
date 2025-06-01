@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const { uploadAlbum, getAlbums, updateAlbum, deleteAlbum } = require('../controllers/albumController');
+const { uploadAlbum, getAlbums, getAlbumById, updateAlbum, deleteAlbum } = require('../controllers/albumController');
 const { upload } = require('../utils/fileUpload');
+const authMiddleware = require('../middleware/auth');
 
-// Routes
-router.post('/', upload.array('images'), uploadAlbum); // Upload new album
-router.get('/', getAlbums); // Get all albums
-router.put('/:id', updateAlbum); // Update album
-router.delete('/:id', deleteAlbum); // Delete album
+router.post('/', authMiddleware, upload.array('images', 10), uploadAlbum);
+router.get('/', authMiddleware, getAlbums);
+router.get('/:id', authMiddleware, getAlbumById);
+router.put('/:id', authMiddleware, updateAlbum);
+router.delete('/:id', authMiddleware, deleteAlbum);
 
 module.exports = router;
