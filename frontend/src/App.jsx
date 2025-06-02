@@ -147,3 +147,76 @@ export default App;
 │   |   ├── README.md
 │   |   ├── vite.config.js
  */
+
+
+
+
+/**LATEST FILE STRUCTURE 9:42AM 6/2 */
+
+/*/hr/
+├── .gitignore
+├── package.json
+├── package-lock.json
+├── node_modules/
+├── backend/
+│   ├── .gitignore
+│   ├── .env
+│   ├── package.json
+│   ├── node_modules/
+│   ├── Uploads/
+│   ├── src/
+│   │   ├── server.js
+│   │   ├── config/
+│   │   │   └── connection.js
+│   │   ├── controllers/
+│   │   │   └── albumController.js
+│   │   ├── middleware/
+│   │   │   └── auth.js
+│   │   ├── models/
+│   │   │   ├── Album.js
+│   │   │   └── User.js
+│   │   ├── routes/
+│   │   │   ├── albumRoutes.js
+│   │   │   └── authRoutes.js
+│   │   ├── utils/
+│   │   │   └── fileUpload.js
+│   ├── seed.js
+├── frontend/
+    ├── .gitignore
+    ├── .env
+    ├── package.json
+    ├── package-lock.json
+    ├── node_modules/
+    ├── public/
+    │   └── placeholder.jpg
+    ├── src/
+    │   ├── api/
+    │   │   └── api.js
+    │   ├── assets/
+    │   │   └── images/
+    │   │       └── White.png
+    │   ├── components/
+    │   │   ├── Album/
+    │   │   │   ├── AlbumComponent.jsx
+    │   │   │   └── SingleAlbum.jsx
+    │   │   ├── AuthForm/
+    │   │   │   ├── AuthForm.css
+    │   │   │   └── AuthForm.jsx
+    │   │   ├── CustomSocialIcons/
+    │   │   │   ├── CustomSocialIcons.css
+    │   │   │   └── CustomSocialIcons.jsx
+    │   │   ├── ForgotPassword/
+    │   │   │   ├── ForgotPassword.css
+    │   │   │   └── ForgotPassword.jsx
+    │   ├── pages/
+    │   │   └── Profile.jsx
+    │   ├── App.css
+    │   ├── App.jsx
+    │   ├── ErrorBoundary.jsx
+    │   ├── index.css
+    │   ├── main.jsx
+    ├── dist/
+    ├── eslint.config.js
+    ├── index.html
+    ├── vite.config.js
+    */ 
