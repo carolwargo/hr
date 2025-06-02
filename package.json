@@ -3,14 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "workspaces": {
-    "packages": [
-      "frontend",
-      "backend"
-    ],
-    "nohoist": [
-      "backend/**",
-      "frontend/**"
-    ]
+    "packages": ["frontend", "backend"],
+    "nohoist": ["backend/**", "frontend/**"]
   },
   "scripts": {
     "install:all": "npm install --workspaces",
