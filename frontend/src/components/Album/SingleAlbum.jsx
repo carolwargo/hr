@@ -1,7 +1,7 @@
 //hr/frontend/src/components/Album/SingleAlbum.jsx
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import api from '../../api';
+import api from '../../api/api';
 import { Container, Row, Col, Spinner } from 'react-bootstrap';
 
 const SingleAlbum = () => {

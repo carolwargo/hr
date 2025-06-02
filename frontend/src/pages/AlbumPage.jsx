@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Nav, Navbar, Modal, Button, Form, Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import api from '../api'; // Adjust path if needed
+import api from '../api/api'; // Adjust path if needed
 import White from '../assets/images/LandScape/White.png';
 
 function Profile() {

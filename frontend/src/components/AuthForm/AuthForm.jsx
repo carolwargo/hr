@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../../api';
+import api from '../../api/api';
 import './AuthForm.css';
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
 import CustomSocialIcons from '../CustomSocialIcons/CustomSocialIcons';
