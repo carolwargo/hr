@@ -1,36 +1,92 @@
-//hr/src/pages/AlbumPage.jsx/profile
-import React from 'react';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import Colors from '../assets/images/LandScape/Colors.png';
-import Purple from '../assets/images/LandScape/Purple.png';
-import Lake from '../assets/images/LandScape/Lake.png';
-import SunRay from '../assets/images/LandScape/SunRay.png';
-import Waterfall from '../assets/images/LandScape/Waterfall.png';
-import YellowFlowers from '../assets/images/LandScape/YellowFlowers.png';
+import React, { useState, useEffect } from 'react';
+import { Container, Nav, Navbar, Modal, Button, Form, Spinner } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import api from '../api'; // Adjust path if needed
 import White from '../assets/images/LandScape/White.png';
 
 function Profile() {
-  const imageArray = [
-    Colors,
-    Purple,
-    Lake,
-    Waterfall,
-    SunRay,
-    YellowFlowers,
-  ];
+  const [albums, setAlbums] = useState([]);
+  const [showUploadModal, setShowUploadModal] = useState(false);
+  const [formData, setFormData] = useState({ title: '', description: '', images: [] });
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchAlbums();
+    } else {
+      navigate('/auth');
+    }
+  }, [isAuthenticated, navigate]);
+
+  const fetchAlbums = async () => {
+    try {
+      const response = await api.get('/api/albums');
+      setAlbums(response.data);
+    } catch (error) {
+      console.error('Error fetching albums:', error);
+      if (error.response?.status === 401) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        setIsAuthenticated(false);
+      }
+      setError('Failed to load albums.');
+    }
+  };
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-  const [showUploadModal, setShowUploadModal] = useState(false);
+
   const handleUploadClick = () => {
-    // Placeholder for upload action; replace with your upload modal logic
-    alert('Upload action triggered! Implement modal here.');
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/auth');
+      return;
+    }
+    setShowUploadModal(true);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleFileChange = (e) => {
+    const files = Array.from(e.target.files);
+    setFormData({ ...formData, images: files });
+  };
+
+  const handleUpload = async (e) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+
+    if (!formData.title || !formData.description || formData.images.length === 0) {
+      setError('Please fill out all fields and select at least one image.');
+      setLoading(false);
+      return;
+    }
+
+    const data = new FormData();
+    data.append('title', formData.title);
+    data.append('description', formData.description);
+    formData.images.forEach((image) => data.append('images', image));
+
+    try {
+      await api.post('/api/albums', data, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      setFormData({ title: '', description: '', images: [] });
+      setShowUploadModal(false);
+      fetchAlbums(); // Refresh albums
+    } catch (error) {
+      setError(error.response?.data?.message || 'Failed to upload album.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -51,12 +107,10 @@ function Profile() {
             }
           }
 
-          /* Ensure content is not hidden under fixed navbar */
           body {
-            padding-top: 50px; /* Adjust based on navbar height */
+            padding-top: 70px;
           }
 
-          /* Floating plus button styles */
           .floating-plus {
             position: fixed;
             bottom: 30px;
@@ -80,7 +134,6 @@ function Profile() {
             background-color: #0056b3;
           }
 
-          /* Adjust footer to avoid overlap */
           .footer {
             position: relative;
             margin-top: 2rem;
@@ -88,13 +141,8 @@ function Profile() {
         `}
       </style>
 
-      {/* Fixed Navbar with Scroll to Top on Brand Click */}
-      <Navbar
-        collapseOnSelect
-        expand="lg"
-        className="bg-info-subtle"
-        fixed="top" // Make navbar fixed
-      >
+      {/* Fixed Navbar */}
+      <Navbar collapseOnSelect expand="lg" className="bg-info-subtle" fixed="top">
         <Container fluid>
           <Navbar.Brand href="#home" className="fw-light" onClick={scrollToTop}>
             <i className="fas fa-camera"></i>
@@ -110,7 +158,7 @@ function Profile() {
               </Nav.Link>
             </Nav>
             <Nav>
-              <Nav.Link eventKey={2} href="#memes">
+              <Nav.Link eventKey={2} href="#/auth">
                 <i className="fas fa-lock"></i> Login
               </Nav.Link>
             </Nav>
@@ -118,7 +166,7 @@ function Profile() {
         </Container>
       </Navbar>
 
-      {/* Background Image and White Mask */}
+      {/* Hero Section */}
       <div>
         <section
           className="py-5 text-center"
@@ -131,7 +179,6 @@ function Profile() {
           }}
         >
           <div
-            className="mt-3"
             style={{
               position: 'absolute',
               top: 0,
@@ -146,10 +193,7 @@ function Profile() {
             <div className="row justify-content-center align-items-center py-lg-5">
               <div className="col-lg-6 col-md-8 mx-auto">
                 <h1 className="fw-light">
-                  <i
-                    className="fas fa-camera"
-                    style={{ marginRight: '4px', fontSize: '1.75rem' }}
-                  ></i>
+                  <i className="fas fa-camera" style={{ marginRight: '4px', fontSize: '1.75rem' }}></i>
                   <b>my</b>album.
                 </h1>
                 <p className="lead text-muted">
@@ -178,24 +222,20 @@ function Profile() {
             <i className="fas fa-camera mb-3"></i>
             <b className="fw-bold">image</b>vault.
           </h3>
+          {error && <div className="text-danger text-center mb-3">{error}</div>}
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            {imageArray.map((image, index) => (
-              <div className="col p-4" key={index}>
+            {albums.map((album) => (
+              <div className="col p-4" key={album._id}>
                 <div className="card shadow-sm border border-dark-subtle">
                   <img
-                    src={image}
+                    src={album.images[0] || '/placeholder.jpg'}
                     className="card-img-top w3-opacity w3-hover-opacity-off border border-bottom"
-                    alt={`Image ${index + 1}`}
+                    alt={album.title}
                     style={{ height: '200px', objectFit: 'cover' }}
                   />
                   <div className="card-body p-4">
-                    <div className="card-text">
-                      <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum velit ullam
-                        dolorum fugiat fuga, molestias reprehenderit recusandae tenetur beatae
-                        voluptatibus nisi?
-                      </p>
-                    </div>
+                    <h5 className="card-title">{album.title}</h5>
+                    <p className="card-text">{album.description}</p>
                   </div>
                   <div className="card-footer d-flex justify-content-between align-items-center py-3">
                     <div className="btn-group">
@@ -224,6 +264,7 @@ function Profile() {
       <div className="floating-plus" onClick={handleUploadClick}>
         +
       </div>
+
       {/* Upload Modal */}
       <Modal show={showUploadModal} onHide={() => setShowUploadModal(false)} centered>
         <Modal.Header closeButton>
@@ -278,7 +319,6 @@ function Profile() {
         </Modal.Body>
       </Modal>
 
-
       {/* Connect Section */}
       <div className="bg-secondary-subtle py-5">
         <div className="container">
@@ -290,11 +330,11 @@ function Profile() {
                 <p style={{ fontSize: '14px' }}>
                   If you need inspiration from our community,{' '}
                   <a style={{ fontSize: '14px' }} href="/" className="link-info">
-                    Follow us on Twitter X{' '}
+                    Follow us on Twitter X
                   </a>
                   , or{' '}
                   <a href="/" className="link-info" style={{ fontSize: '14px' }}>
-                    Like us on Facebook{' '}
+                    Like us on Facebook
                   </a>
                   . For non-urgent inquiries, feel free to reach out to us via{' '}
                   <a href="mailto:carolwargo.dev@gmail.com" className="link-info">
@@ -310,10 +350,9 @@ function Profile() {
             </div>
             <div className="col-sm-12 col-md-2 col-lg-2"></div>
             <div className="col-sm-12 col-md-5 col-lg-5">
-                  <div className="container px-lg-5">
-                 <h5>CUSTOMER SERVICE</h5>
-                <div className="d-flex justify-content-start align-items-center g-3">
-                 
+              <div className="container px-lg-5">
+                <h5>CUSTOMER SERVICE</h5>
+                <div className="row">
                   <div className="col-sm-6 col-md-6 col-lg-6">
                     <ul className="list-unstyled">
                       <li>
@@ -363,6 +402,17 @@ function Profile() {
           </a>
         </div>
       </div>
+
+      {/* Footer */}
+      <footer className="text-muted py-5 footer">
+        <div className="container">
+          <p className="float-end mb-1">
+            <a href="#home" style={{ color: '#FF385C' }} onClick={scrollToTop}>
+              Back to top
+            </a>
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }

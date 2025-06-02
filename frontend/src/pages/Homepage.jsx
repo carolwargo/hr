@@ -11,7 +11,7 @@ import api from '../api/index';
 import White from '../assets/images/LandScape/White.png';
 import '../App.css'; 
 
-function AlbumPage() {
+function Homepage() {
   const [albums, setAlbums] = useState([]);
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -564,4 +564,4 @@ function AlbumPage() {
   );
 }
 
-export default AlbumPage;
+export default Homepage;

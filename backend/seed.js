@@ -1,16 +1,13 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const User = require('./src/models/User');
-const Album = require('./src/models/Album');
+const User = require('./models/User');
+const Album = require('./models/Album');
 
 dotenv.config();
 
 const seedData = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(process.env.MONGODB_URI);
     console.log('Connected to MongoDB');
 
     await User.deleteMany({});

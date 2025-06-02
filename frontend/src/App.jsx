@@ -79,27 +79,71 @@ export default App;
 
 
 /**
+ * Project File Structure:
  * hr/
-├── .gitignore
-├── package.json
+├── root/
+│   ├── node_modules/
+│   ├── .gitignore
+│   ├── package-lock.json
+│   ├── package.json
 ├── backend/
+│   ├── config/
+│   │   ├── connection.js
+│   ├── controllers/
+│   │   ├── albumController.js
+│   ├── middleware/
+│   │   ├── auth.js
+│   ├── models/
+│   │   ├── Album.js
+│   │   ├── User.js
+│   ├── routes/
+│   │   ├── albumRoutes.js
+│   │   ├── authRoutes.js
+│   ├── uploads/
+│   ├── utils/
+│   │   ├── fileUpload.js
 │   ├── .env
 │   ├── .gitignore
 │   ├── package.json
-│   ├── src/
-│   │   ├── config/connection.js
-│   │   ├── models/Album.js
-│   │   ├── routes/albumRoutes.js
-│   │   ├── controllers/albumController.js
-│   │   ├── utils/fileUpload.js
-│   │   └── server.js
-│   └── uploads/
+│   ├── seed.js
+│   ├── server.js
 ├── frontend/
-│   ├── .env
-│   ├── .gitignore
-│   ├── package.json
-│   ├── vite.config.js
-│   ├── src/
-│   │   └── (your album component and other frontend files)
-│   └── dist/
+|   ├── dist/
+│   ├── node_modules/
+│   ├── public/
+|   ├── src/
+│   │   ├── api/
+│   │   │   └── index.jsx
+│   │   ├── assets/
+│   │   │   └── images/
+│   │   ├── components/
+│   │   │   ├── Album/
+│   │   │   │   ├── AlbumComponent.jsx 
+│   │   │   │   └── SingleAlbum.jsx
+│   │   │   ├── AuthForm/
+│   │   │   |   ├── AuthForm.css
+│   │   │   |   |── AuthForm.jsx
+│   │   │   ├── CustomSocialIcons/
+│   │   │   |   ├── CustomSocialIcons.css
+│   │   │   |   └── CustomSocialIcons.jsx
+│   │   │   ├── ForgotPassword/
+│   │   │   |   ├── ForgotPassword.css
+│   │   │   |   └── ForgotPassword.jsx
+│   │   ├── pages/
+│   │   │   ├── AlbumPage.jsx
+│   │   │   ├── Homepage.jsx
+│   │   │   ├── Profile.jsx
+│   |   ├── .env
+│   |   ├── App.css
+│   |   ├── App.jsx
+│   │   ├── ErrorBoundary.jsx
+│   |   ├── index.css
+│   |   ├── main.jsx
+│   |   ├── .gitignore
+│   |   ├── eslint.config.js
+│   |   ├── index.html
+│   |   ├── package-lock.json
+│   |   ├── package.json
+│   |   ├── README.md
+│   |   ├── vite.config.js
  */

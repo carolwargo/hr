@@ -29,7 +29,6 @@ function Profile() {
   };
 
   const handleUploadClick = () => {
-    // Placeholder for upload action; replace with your upload modal logic
     alert('Upload action triggered! Implement modal here.');
   };
 
@@ -88,12 +87,12 @@ function Profile() {
         `}
       </style>
 
-      {/* Fixed Navbar with Scroll to Top on Brand Click */}
+
       <Navbar
         collapseOnSelect
         expand="lg"
         className="bg-info-subtle"
-        fixed="top" // Make navbar fixed
+        fixed="top" 
       >
         <Container fluid>
           <Navbar.Brand href="#home" className="fw-light" onClick={scrollToTop}>
@@ -118,7 +117,7 @@ function Profile() {
         </Container>
       </Navbar>
 
-      {/* Background Image and White Mask */}
+
       <div>
         <section
           className="py-5 text-center"
@@ -171,7 +170,7 @@ function Profile() {
         </section>
       </div>
 
-      {/* Album Grid */}
+
       <div className="bg-secondary-subtle">
         <div className="container py-5">
           <h3 className="fw-light text-center">
@@ -220,12 +219,12 @@ function Profile() {
         </div>
       </div>
 
-      {/* Floating Plus Button */}
+
       <div className="floating-plus" onClick={handleUploadClick}>
         +
       </div>
 
-      {/* Connect Section */}
+
       <div className="bg-secondary-subtle py-5">
         <div className="container">
           <div className="row d-flex justify-content-center align-items-center g-5">
@@ -309,7 +308,6 @@ function Profile() {
         </div>
       </div>
 
-      {/* Footer */}
       <footer className="text-muted py-5 footer">
         <div className="container">
           <p className="float-end mb-1">
@@ -324,3 +322,6 @@ function Profile() {
 }
 
 export default Profile;
+
+
+
