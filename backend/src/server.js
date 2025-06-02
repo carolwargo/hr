@@ -26,3 +26,33 @@ mongoose.connect(process.env.MONGODB_URI)
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+
+
+
+
+
+/**
+ * const express = require('express');
+const cors = require('cors');
+const connectDB = require('./config/connection');
+const albumRoutes = require('./routes/AlbumRoutes');
+const authRoutes = require('./routes/authRoutes');
+require('dotenv').config();
+
+const app = express();
+
+app.use(cors({
+  origin: ['http://localhost:5173', 'https://carolwargo.github.io/hr/'],
+}));
+app.use(express.json());
+app.use('/uploads', express.static('Uploads'));
+
+app.use('/api/albums', albumRoutes);
+app.use('/api/auth', authRoutes);
+
+connectDB();
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+ */
